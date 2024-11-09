@@ -74,9 +74,7 @@ The CLEO Initiative website is a React-based platform designed to connect senior
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 💖 Made with Love
-
-This project is maintained with ❤️ by the CLEO Initiative team. We're passionate about bridging the digital divide and empowering seniors through technology. If you'd like to support our mission or get involved, please visit our [website](https://cleoinitiative.org).
+Made with ❤️ by the CLEO Initiative team. We're passionate about bridging the digital divide and empowering seniors through technology. If you'd like to support our mission or get involved, please visit our [website](https://cleoinitiative.org).
 
 Special thanks to all our contributors and volunteers who make this project possible!
 
