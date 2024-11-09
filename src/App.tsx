@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import { createTheme, Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -8,12 +8,11 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import News from './pages/News';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect } from 'react';
 import emailjs from '@emailjs/browser';
-import ScrollToTop from './components/ScrollToTop';
 import GetStarted from './pages/GetStarted';
 import Testimonials from './pages/Testimonials';
 import FAQ from './components/FAQ';
+import { useEffect } from 'react';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -28,7 +27,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const theme: Theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#0a4b78',
@@ -95,7 +94,6 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <ScrollToTop />
         <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
