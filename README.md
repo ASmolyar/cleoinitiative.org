@@ -32,8 +32,8 @@ The CLEO Initiative website is a React-based platform designed to connect senior
 
 1. Clone the repository
 
-    git clone https://github.com/your-username/cleo-initiative.git
-    cd cleo-initiative
+    git clone https://github.com/ASmolyar/cleoinitiative.org.git
+    cd cleoinitiative.org
 
 2. Install dependencies
 
