@@ -14,15 +14,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install and Build
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Clean Install Dependencies
         run: |
+          rm -rf node_modules
+          rm -f package-lock.json
           npm install
+
+      - name: Create .nojekyll
+        run: touch .nojekyll
+
+      - name: Build
+        run: |
           npm run build
           cp CNAME dist/
+          cp .nojekyll dist/
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "<>"
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: dist
-          branch: gh-pages
-          clean: true 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true 
