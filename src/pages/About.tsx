@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { Box, Container, Typography, Grid, Paper, Button, Divider } from '@mui/material';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { Box, Container, Typography, Grid, Paper, Button} from '@mui/material';
+import { motion} from 'framer-motion';
 import ParticleBackground from '../components/ParticleBackground';
 import { Link } from 'react-router-dom';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SchoolIcon from '@mui/icons-material/School';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PublicIcon from '@mui/icons-material/Public';
