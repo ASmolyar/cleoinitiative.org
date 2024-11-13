@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 import emailjs from '@emailjs/browser';
 import {
   Box,
@@ -17,13 +15,6 @@ import { motion } from 'framer-motion';
 import ParticleBackground from '../components/ParticleBackground';
 import SendIcon from '@mui/icons-material/Send';
 
-const validationSchema = yup.object({
-  firstName: yup.string().required('First name is required'),
-  lastName: yup.string().required('Last name is required'),
-  email: yup.string().email('Enter a valid email').required('Email is required'),
-  message: yup.string().required('Message is required'),
-});
-
 interface FormValues {
   firstName: string;
   lastName: string;
@@ -33,37 +24,48 @@ interface FormValues {
 
 const Contact: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
-
-  const formik = useFormik<FormValues>({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      message: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      try {
-        await emailjs.send(
-          "service_sbx09m9",
-          "template_8h54p7q",
-          {
-            from_name: `${values.firstName} ${values.lastName}`,
-            from_email: values.email,
-            message: values.message,
-            to_name: "CLEO Initiative",
-          },
-          "jnT6XaLdydE07qf8-",
-        );
-        
-        setSubmitStatus('success');
-        formik.resetForm();
-      } catch (error) {
-        setSubmitStatus('error');
-        console.error('Email send failed:', error);
-      }
-    },
+  const [formValues, setFormValues] = useState<FormValues>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: ''
   });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await emailjs.send(
+        "service_sbx09m9",
+        "template_8h54p7q",
+        {
+          from_name: `${formValues.firstName} ${formValues.lastName}`,
+          from_email: formValues.email,
+          message: formValues.message,
+          to_name: "CLEO Initiative",
+        },
+        "jnT6XaLdydE07qf8-",
+      );
+      
+      setSubmitStatus('success');
+      setFormValues({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Email send failed:', error);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   return (
     <>
@@ -159,7 +161,7 @@ const Contact: React.FC = () => {
                   mb: 12,
                 }}
               >
-                <Box component="form" onSubmit={formik.handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit}>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                       <TextField
@@ -168,10 +170,10 @@ const Contact: React.FC = () => {
                         name="firstName"
                         label="First Name"
                         required
-                        value={formik.values.firstName}
-                        onChange={formik.handleChange}
-                        error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-                        helperText={formik.touched.firstName && formik.errors.firstName}
+                        value={formValues.firstName}
+                        onChange={handleChange}
+                        error={formValues.firstName.length > 0}
+                        helperText={formValues.firstName.length > 0 && 'First name is required'}
                         sx={{
                           '& .MuiOutlinedInput-root': {
                             '& fieldset': {
@@ -200,10 +202,10 @@ const Contact: React.FC = () => {
                         name="lastName"
                         label="Last Name"
                         required
-                        value={formik.values.lastName}
-                        onChange={formik.handleChange}
-                        error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-                        helperText={formik.touched.lastName && formik.errors.lastName}
+                        value={formValues.lastName}
+                        onChange={handleChange}
+                        error={formValues.lastName.length > 0}
+                        helperText={formValues.lastName.length > 0 && 'Last name is required'}
                         sx={{
                           '& .MuiOutlinedInput-root': {
                             '& fieldset': {
@@ -232,10 +234,10 @@ const Contact: React.FC = () => {
                         name="email"
                         label="Email"
                         required
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        error={formik.touched.email && Boolean(formik.errors.email)}
-                        helperText={formik.touched.email && formik.errors.email}
+                        value={formValues.email}
+                        onChange={handleChange}
+                        error={formValues.email.length > 0}
+                        helperText={formValues.email.length > 0 && 'Enter a valid email'}
                         sx={{
                           '& .MuiOutlinedInput-root': {
                             '& fieldset': {
@@ -266,10 +268,10 @@ const Contact: React.FC = () => {
                         required
                         multiline
                         rows={4}
-                        value={formik.values.message}
-                        onChange={formik.handleChange}
-                        error={formik.touched.message && Boolean(formik.errors.message)}
-                        helperText={formik.touched.message && formik.errors.message}
+                        value={formValues.message}
+                        onChange={handleChange}
+                        error={formValues.message.length > 0}
+                        helperText={formValues.message.length > 0 && 'Message is required'}
                         sx={{
                           '& .MuiOutlinedInput-root': {
                             '& fieldset': {

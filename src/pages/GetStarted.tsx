@@ -2,10 +2,9 @@ import React from 'react';
 import { Box, Container, Typography, Paper, Button, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import ParticleBackground from '../components/ParticleBackground';
-
-import SchoolIcon from '@mui/icons-material/School';
-import GroupsIcon from '@mui/icons-material/Groups';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import GroupsIcon from '@mui/icons-material/Groups';
+import SchoolIcon from '@mui/icons-material/School';
 
 interface StepCard {
   title: string;

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { Box, Container, Typography, Grid, Paper, Button} from '@mui/material';
-import { motion} from 'framer-motion';
+import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material';
+import { motion } from 'framer-motion';
 import ParticleBackground from '../components/ParticleBackground';
 import { Link } from 'react-router-dom';
 import SchoolIcon from '@mui/icons-material/School';
