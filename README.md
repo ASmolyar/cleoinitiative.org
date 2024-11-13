@@ -59,6 +59,7 @@ The CLEO Initiative website is a React-based platform designed to connect senior
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
+- `npm run deploy` - Deploy to GitHub Pages
 
 ## 📁 Project Structure
 
