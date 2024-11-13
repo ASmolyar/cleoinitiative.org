@@ -38,6 +38,12 @@ jobs:
           cp CNAME dist/
           cp public/site.webmanifest dist/
           cp public/*.png dist/
+          
+          # Debug: List contents of dist directory
+          echo "Contents of dist directory:"
+          ls -la dist/
+          echo "Contents of public directory:"
+          ls -la public/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
