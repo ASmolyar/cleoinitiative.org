@@ -29,12 +29,18 @@ jobs:
           npm install rollup
 
       - name: Build
-        env:
-          GITHUB_PAGES: 'true'
+        run: npm run build
+
+      - name: Prepare for deployment
         run: |
-          npm run build
           touch dist/.nojekyll
           echo "cleoinitiative.org" > dist/CNAME
+          cp public/site.webmanifest dist/
+          cp public/*.png dist/ || true
+          
+          # Debug: show contents
+          echo "Contents of dist directory:"
+          ls -la dist/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
