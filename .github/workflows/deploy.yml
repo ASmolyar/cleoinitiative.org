@@ -30,28 +30,19 @@ jobs:
           npm install @rollup/rollup-linux-x64-gnu
 
       - name: Build
+        env:
+          GITHUB_PAGES: 'true'
         run: npm run build
 
       - name: Prepare for deployment
         run: |
           touch dist/.nojekyll
           cp CNAME dist/
-          
-          # Ensure manifest exists and copy it
-          echo "Checking if manifest exists:"
-          ls -la public/site.webmanifest
-          echo "Copying manifest:"
           cp public/site.webmanifest dist/
-          
-          # Copy all PNG files
-          echo "Copying PNG files:"
           cp public/*.png dist/ || true
           
-          # Verify final dist contents
           echo "Final dist directory contents:"
           ls -la dist/
-          echo "Checking if manifest is in dist:"
-          cat dist/site.webmanifest
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
