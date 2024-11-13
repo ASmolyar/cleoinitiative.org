@@ -37,7 +37,7 @@ jobs:
       - name: Prepare for deployment
         run: |
           touch dist/.nojekyll
-          cp CNAME dist/
+          [ -f CNAME ] && cp CNAME dist/ || echo "No CNAME file found"
           cp public/site.webmanifest dist/
           cp public/*.png dist/ || true
           
