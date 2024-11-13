@@ -28,6 +28,8 @@ jobs:
         run: |
           touch dist/.nojekyll
           cp CNAME dist/
+          cp public/site.webmanifest dist/
+          cp public/*.png dist/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
